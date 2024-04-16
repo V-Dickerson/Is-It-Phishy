@@ -1,5 +1,10 @@
 {
   "private": true,
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:5000"
+    }
+  },
   "scripts": {
     "dev": "next",
     "build": "next build",

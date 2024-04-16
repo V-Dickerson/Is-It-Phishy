@@ -1,7 +1,7 @@
 import { Flex, VStack, Card, CardHeader, Heading, CardBody, CardFooter, ButtonGroup, Button, Box, Text, useDisclosure, Modal, ModalHeader, ModalCloseButton, ModalBody, ModalOverlay, ModalContent, ModalFooter } from "@chakra-ui/react"
 import { propagateServerField } from "next/dist/server/lib/render-server";
 import { Divider } from "@chakra-ui/react"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModelVision from "../components/ModelVision";
 import KeepingScore from "../components/KeepingScore";
 
@@ -19,21 +19,31 @@ const Play = () => {
         is_open: false
     });
     */
-    const [winCondition, setWinCondition] = useState(0);
-    const [url, setUrl] = useState("https://www.sample-url.com");
-    const [url_data, setUrlData] = useState(["Sample data 1", "Sample data 2", "Sample data 3"]);
-    const [is_phish, setIsPhish] = useState(false);
-    const [usr_correct, setUsrCorrect] = useState(0);
+    const [usr_correct, setUsrCorrect] = useState(0); // maybe not necessary, same w/ model_correct
     const [model_correct, setModelCorrect] = useState(0);
     const [total_rounds, setTotalRounds] = useState(0);
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    function handleChoice (is_phish) {
-        // handle function calls
-        // is_phish: choice made by the user, not the actual answer
-        
-        
-    }
+    const [data, setData] = useState({
+        url: "",
+        url_data: {},
+        model_answer: -1,
+        model_confidence: -1,
+        answer: -1,
+    });
+
+    useEffect(() => {
+        fetch('/get-question').then((res) =>
+        res.json().then((data) => {
+            setData({
+                url: data.url,
+                url_data: data.url_data,
+                model_answer: data.model_answer,
+                model_confidence: data.model_confidence,
+                answer: data.answer
+            });
+        }))
+    }, []);
 
     return (
         <Flex height="100vh" alignItems="center" justifyContent="center">
@@ -42,7 +52,7 @@ const Play = () => {
                     <VStack spacing='3vh' align='center'>
                         <CardHeader alignItems='center'>
                             <Heading size='lg' textAlign='center'> URL: </Heading>
-                            <Text align='center' fontSize='med' padding='1vh'>{url}</Text>
+                            <Text align='center' fontSize='med' padding='1vh'>{data.url}</Text>
                             <Divider minWidth='200px' />
                         </CardHeader>
                         <Button size='lg' textAlign='center' alignSelf='center' width='20vw' minWidth='200px' onClick={onOpen}>Model View...</Button>
@@ -54,7 +64,7 @@ const Play = () => {
                                 <ModalCloseButton />
                                 <ModalBody>
                                     <Text align='center'>This is what the model sees!</Text>
-                                    <ModelVision data={url_data} />
+                                    <ModelVision props={data} />
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button colorScheme='blue' onClick={onClose}>Close</Button>
@@ -66,8 +76,8 @@ const Play = () => {
                     </VStack>
                     <CardFooter marginTop='20vh'>
                         <ButtonGroup gap='5' width='inherit'>
-                            <Button colorScheme='green' size='lg' width='20vw' marginLeft='2vw' onClick={() => handleChoice(false)}>Legit!</Button>
-                            <Button colorScheme='red' size='lg' width='20vw' marginRight='2vw' onClick={() => handleChoice(true)}>Go Phish!</Button>
+                            <Button colorScheme='green' size='lg' width='20vw' marginLeft='2vw'>Legit!</Button>
+                            <Button colorScheme='red' size='lg' width='20vw' marginRight='2vw'>Go Phish!</Button>
                         </ButtonGroup>
                     </CardFooter>
                 </Card>

@@ -5,9 +5,13 @@ import pandas as pd
 from sklearn.neural_network import MLPClassifier
 import warnings
 
+
 warnings.filterwarnings("ignore")
 api = Flask(__name__)
 
+######################################################
+################## REUSED VARIABLES ##################
+######################################################
 api.model = None
 api.urls = None
 api.url_columns = None
@@ -34,12 +38,14 @@ def getRandom(): # returns an array of the data features from the array
     if api.predictions is None:
         loadPredictions()
     
+    # the random URL, model choice, prediction, etc that we're selecting to analyze
     randomIndex = random.randint(0,len(api.y_test))
 
+    # selecting from api environment variables the information necessary for the game
     model_pred = api.predictions[randomIndex]
-    print(api.predictions_confidence)
+
     confidence = api.predictions_confidence[randomIndex][model_pred]*100
-    print(confidence)
+
     to_return = {
         "url": api.urls.iloc[randomIndex],
         "url_data": dict(zip(api.columns, api.raw_x.iloc[randomIndex])),
@@ -47,7 +53,7 @@ def getRandom(): # returns an array of the data features from the array
         "model_answer": int(model_pred),
         "model_confidence": int(confidence),
     }
-    print("##############################################")
+
     return to_return
 
 
@@ -91,5 +97,4 @@ def loadPredictions():
 
     api.predictions = api.model.predict(api.x_test)
     api.predictions_confidence = api.model.predict_proba(api.x_test)
-
 
