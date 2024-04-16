@@ -10,8 +10,11 @@ api = Flask(__name__)
 
 api.model = None
 api.urls = None
+api.url_columns = None
 api.x_test = None
+api.raw_x = None
 api.y_test = None
+api.model_scaler = None
 api.predictions = None
 api.predictions_confidence = None
 
@@ -34,13 +37,15 @@ def getRandom(): # returns an array of the data features from the array
     randomIndex = random.randint(0,len(api.y_test))
 
     model_pred = api.predictions[randomIndex]
-
+    print(api.predictions_confidence)
+    confidence = api.predictions_confidence[randomIndex][model_pred]*100
+    print(confidence)
     to_return = {
         "url": api.urls.iloc[randomIndex],
-        "url_data": list(api.x_test.iloc[randomIndex]),
+        "url_data": dict(zip(api.columns, api.raw_x.iloc[randomIndex])),
         "answer": int(api.y_test.iloc[randomIndex]),
         "model_answer": int(model_pred),
-        "model_confidence": int(api.predictions_confidence[randomIndex][model_pred]),
+        "model_confidence": int(confidence),
     }
     print("##############################################")
     return to_return
@@ -58,6 +63,8 @@ def loadModel():
     try: 
         with open('../../model-config/phishing-model-v1.pkl', 'rb') as file_handle:
             api.model = pickle.load(file_handle)
+        with open('../../model-config/model-scaler.pkl', 'rb') as file_handle:
+            api.model_scaler = pickle.load(file_handle)
         return True # worked as expected
     except:
         return False # something went wrong, error behavior to report
@@ -65,11 +72,13 @@ def loadModel():
 # loads the test data used for the game (verifying predictions, informing users)
 def loadTesting():
     print('loadTesting called from server')
-    testing = pd.read_parquet('../../model-config/Training.parquet')
+    testing = pd.read_parquet('../../model-config/Testing.circ')
     api.urls = testing['url'] # grabbing this for later! easily interfaced for returning data to server
     testing = testing.drop(['url'], axis=1)
     testing['status'] = testing['status'].replace({'phishing':1, 'legitimate':0})
-    api.x_test = testing.drop('status', axis=1)
+    api.raw_x = testing.drop('status', axis=1)
+    api.columns = list(api.raw_x.columns.values)
+    api.x_test = api.model_scaler.transform(api.raw_x)
     api.y_test = testing['status']
     
 # loads the predictions from the test data into the API.
