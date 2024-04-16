@@ -28,6 +28,13 @@ const Play = () => {
     const [total_rounds, setTotalRounds] = useState(0);
     const { isOpen, onOpen, onClose } = useDisclosure();
 
+    function handleChoice (is_phish) {
+        // handle function calls
+        // is_phish: choice made by the user, not the actual answer
+        
+        
+    }
+
     return (
         <Flex height="100vh" alignItems="center" justifyContent="center">
             <VStack direction='column' spacing='24px'>
@@ -59,8 +66,8 @@ const Play = () => {
                     </VStack>
                     <CardFooter marginTop='20vh'>
                         <ButtonGroup gap='5' width='inherit'>
-                            <Button colorScheme='green' size='lg' width='20vw' marginLeft='2vw'>Legit!</Button>
-                            <Button colorScheme='red' size='lg' width='20vw' marginRight='2vw'>Go Phish!</Button>
+                            <Button colorScheme='green' size='lg' width='20vw' marginLeft='2vw' onClick={() => handleChoice(false)}>Legit!</Button>
+                            <Button colorScheme='red' size='lg' width='20vw' marginRight='2vw' onClick={() => handleChoice(true)}>Go Phish!</Button>
                         </ButtonGroup>
                     </CardFooter>
                 </Card>
