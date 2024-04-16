@@ -1,10 +1,6 @@
 {
   "private": true,
-  "proxy": {
-    "/api": {
-      "target": "http://localhost:5000"
-    }
-  },
+  "proxy": "http://localhost:5000/",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -18,7 +14,8 @@
     "framer-motion": "^11.0.28",
     "next": "latest",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "@types/node": "^12.12.21",

@@ -1,8 +1,7 @@
-import { Flex, VStack, Card, CardHeader, Heading, CardBody, CardFooter, ButtonGroup, Button, Box, Text, useDisclosure, Modal, ModalHeader, ModalCloseButton, ModalBody, ModalOverlay, ModalContent, ModalFooter } from "@chakra-ui/react"
+import { Flex, VStack, Card, CardHeader, Heading, CardBody, CardFooter, ButtonGroup, Button, Box, Text, useDisclosure, Modal, ModalHeader, ModalCloseButton, ModalBody, ModalOverlay, ModalContent, ModalFooter, TableContainer, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react"
 import { propagateServerField } from "next/dist/server/lib/render-server";
 import { Divider } from "@chakra-ui/react"
 import { useEffect, useState } from "react";
-import ModelVision from "../components/ModelVision";
 import KeepingScore from "../components/KeepingScore";
 
 
@@ -26,14 +25,14 @@ const Play = () => {
 
     const [data, setData] = useState({
         url: "",
-        url_data: {},
+        url_data: [],
         model_answer: -1,
         model_confidence: -1,
         answer: -1,
     });
 
     useEffect(() => {
-        fetch('/get-question').then((res) =>
+        fetch('/api/get-question').then((res) =>
         res.json().then((data) => {
             setData({
                 url: data.url,
@@ -57,14 +56,34 @@ const Play = () => {
                         </CardHeader>
                         <Button size='lg' textAlign='center' alignSelf='center' width='20vw' minWidth='200px' onClick={onOpen}>Model View...</Button>
 
-                        <Modal isOpen={isOpen} onClose={onClose}>
+                        <Modal isOpen={isOpen} onClose={onClose} scrollBehavior='inside'>
                             <ModalOverlay />
                             <ModalContent>
                                 <ModalHeader>Model View</ModalHeader>
                                 <ModalCloseButton />
                                 <ModalBody>
                                     <Text align='center'>This is what the model sees!</Text>
-                                    <ModelVision props={data} />
+                                    <Divider padding='1vh' />
+                                    <TableContainer>
+                                        <Table size='sm' variant='simple' alignSelf='center'>
+                                            <Thead>
+                                                <Tr>
+                                                    <Th>Descriptor</Th>
+                                                    <Th>Value</Th>
+                                                </Tr>
+                                            </Thead>
+                                            <Tbody>
+                                            {
+                                                data.url_data.map(it => 
+                                                    <Tr>
+                                                        <Td>{it[0]}</Td>
+                                                        <Td>{it[1]}</Td>
+                                                    </Tr>
+                                                )
+                                            }
+                                            </Tbody>
+                                        </Table>
+                                    </TableContainer>
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button colorScheme='blue' onClick={onClose}>Close</Button>

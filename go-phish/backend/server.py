@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, json
 import pickle
 import random
 import pandas as pd
@@ -48,7 +48,7 @@ def getRandom(): # returns an array of the data features from the array
 
     to_return = {
         "url": api.urls.iloc[randomIndex],
-        "url_data": dict(zip(api.columns, api.raw_x.iloc[randomIndex])),
+        "url_data": list([[api.columns[i], api.raw_x.iloc[randomIndex][i]] for i in range(len(api.columns))]), # json.dumps(list(zip(api.columns, api.raw_x.iloc[randomIndex]))),
         "answer": int(api.y_test.iloc[randomIndex]),
         "model_answer": int(model_pred),
         "model_confidence": int(confidence),
