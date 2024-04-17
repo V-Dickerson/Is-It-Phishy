@@ -44,7 +44,6 @@ const Play = () => {
             setModelCorrect(model_correct + 1)
         }
         setAskingQuestion(!asking_question)
-        getQuestion()
     }
 
     function getQuestion() {
@@ -61,16 +60,19 @@ const Play = () => {
     }
 
     useEffect(() => {
-        getQuestion()
+        if (data.model_answer == -1) {
+            console.log('on load react hook')
+            getQuestion()
+        }
     }, []);
 
     function playScreen() {
         return (
-            <Card align='center' minHeight='60vh' minWidth='50vh' maxW='lg'>
+            <Card align='center' w='lg' h='md' maxH='md'>
                 <VStack spacing='3vh' align='center'>
                     <CardHeader alignItems='center'>
                         <Heading size='lg' textAlign='center'> URL: </Heading>
-                        <Text align='center' fontSize='med' padding='1vh'>{data.url}</Text>
+                        <Text align='center' fontSize='med' padding='1vh' maxW='lg'>{data.url}</Text>
                         <Divider minWidth='200px' />
                     </CardHeader>
                     <Button size='lg' textAlign='center' alignSelf='center' width='20vw' minWidth='200px' onClick={onOpen}>Model View...</Button>
@@ -112,10 +114,10 @@ const Play = () => {
 
 
                 </VStack>
-                <CardFooter marginTop='20vh'>
+                <CardFooter>
                     <ButtonGroup gap='5' maxW='lg'>
-                        <Button colorScheme='green' size='lg' width='20vw' marginLeft='2vw' onClick={() => handleAnswer(false)}>Legit!</Button>
-                        <Button colorScheme='red' size='lg' width='20vw' marginRight='2vw' onClick={() => handleAnswer(true)}>Go Phish!</Button>
+                        <Button colorScheme='green' size='lg' marginLeft='2vw' onClick={() => handleAnswer(false)}>Legit!</Button>
+                        <Button colorScheme='red' size='lg' marginRight='2vw' onClick={() => handleAnswer(true)}>Phishy!</Button>
                     </ButtonGroup>
                 </CardFooter>
             </Card>
@@ -124,13 +126,13 @@ const Play = () => {
 
     function answerScreen() {
         return (
-            <Card align='center' minHeight='60vh' minWidth='50vh' maxW='lg' maxH='md'>
+            <Card align='center' minHeight='60vh' minWidth='50vh' w='lg' h='md' maxH='md'>
                 <VStack spacing='3vh' align='center' maxH='inherit'>
                 <CardHeader alignItems='center'>
                     <Heading size='lg' textAlign='center'> The correct answer was: </Heading>
                     <Heading size='md' textAlign='center' padding='1vh'>
                         {data.answer == 1 &&
-                            "Phishing!"
+                            "Phishy!"
                         }
                         {data.answer == 0 && 
                             "Legit!"
@@ -154,7 +156,7 @@ const Play = () => {
                 <CardFooter>
                     <ButtonGroup gap='5' maxW='lg'>
                         <Button colorScheme='blue' size='lg' width='20vw' marginLeft='2vw' onClick={() => {router.push('/')}} key="restart">Restart</Button>
-                        <Button colorScheme='blue' size='lg' width='20vw' marginRight='2vw' onClick={() => setAskingQuestion(!asking_question)} key="continue">Continue</Button>
+                        <Button colorScheme='blue' size='lg' width='20vw' marginRight='2vw' onClick={() => {setAskingQuestion(!asking_question); getQuestion()}} key="continue">Continue</Button>
                     </ButtonGroup>
                 </CardFooter>
                 </VStack>
@@ -173,7 +175,7 @@ const Play = () => {
                     answerScreen()
                 }
                 <KeepingScore model_correct={model_correct} usr_correct={usr_correct} total_rounds={total_rounds} />
-                <Box ml='3'>
+                <Box ml='5'>
                     <Text fontWeight='bold'>
                         Made by Vanessa Dickerson
                     </Text>

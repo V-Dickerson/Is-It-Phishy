@@ -12,7 +12,7 @@ const IndexPage = () => {
         <Card align='center' h='60vh' w='50vh'>
           <VStack spacing='40px'>
             <CardHeader>
-              <Heading size='2xl' textAlign='center'> Welcome to Go Phish!</Heading>
+              <Heading size='xl' textAlign='center'> Is it Phishy?</Heading>
             </CardHeader>
             <CardBody>
               <Text align='center' fontSize='xl'>You might know that neural networks are smart, but how do you stack up?</Text>
@@ -21,7 +21,7 @@ const IndexPage = () => {
             <CardFooter>
               <ButtonGroup gap='12'>
                 <Button colorScheme='teal' size='lg' onClick={() => {router.push('/play')}}>Begin</Button>
-                <Button colorScheme='teal' size='lg'>About</Button>
+                <Button colorScheme='teal' size='lg' onClick={() => {router.push('/about')}}>About</Button>
               </ButtonGroup>
             </CardFooter>
           </VStack>
