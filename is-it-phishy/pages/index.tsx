@@ -7,8 +7,8 @@ import { useRouter } from "next/router";
 const IndexPage = () => {
   const router = useRouter();
   return (
-    <Flex height="100vh" width='100vw' alignItems="center" justifyContent="center">
-      <VStack direction='column' spacing='24px'>
+    <Flex height="100vh" width='100vw' alignItems="center" alignContent='center'>
+      <VStack direction='column' spacing='24px' align='center' width='100vw'>
         <Card align='center' h='60vh' w='50vh'>
           <VStack spacing='40px'>
             <CardHeader>

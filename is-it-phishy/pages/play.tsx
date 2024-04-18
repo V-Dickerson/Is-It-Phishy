@@ -1,4 +1,4 @@
-import { Flex, VStack, Card, CardHeader, Heading, CardBody, CardFooter, ButtonGroup, Button, Box, Text, useDisclosure, Modal, ModalHeader, ModalCloseButton, ModalBody, ModalOverlay, ModalContent, ModalFooter, TableContainer, Table, Thead, Tbody, Tr, Th, Td, Container } from "@chakra-ui/react"
+import { Flex, VStack, Card, CardHeader, Heading, CardBody, CardFooter, ButtonGroup, Button, Box, Text, useDisclosure, Modal, ModalHeader, ModalCloseButton, ModalBody, ModalOverlay, ModalContent, ModalFooter, TableContainer, Table, Thead, Tbody, Tr, Th, Td, Container, Center } from "@chakra-ui/react"
 import { propagateServerField } from "next/dist/server/lib/render-server";
 import { Divider } from "@chakra-ui/react"
 import { useEffect, useState } from "react";
@@ -73,14 +73,16 @@ const Play = () => {
 
     function playScreen() {
         return (
-            <Card align='center' w='lg' h='md' maxH='md'>
-                <VStack spacing='3vh' align='center'>
+            <Card align='center' w={{base: 'sm', md: 'lg'}} h='md' maxH='md'>
                     <CardHeader alignItems='center'>
                         <Heading size='lg' textAlign='center'> URL: </Heading>
-                        <Text align='center' fontSize='med' padding='1vh' maxW='lg'>{data.url}</Text>
+                        <Text align='center' fontSize='med' padding='1vh' maxW='lg' wordBreak='break-word'>{data.url}</Text>
                         <Divider minWidth='200px' />
                     </CardHeader>
+                    <CardBody>
                     <Button size='lg' textAlign='center' alignSelf='center' width='20vw' minWidth='200px' onClick={onOpen}>Model View...</Button>
+                    </CardBody>
+                    
 
                     <Modal isOpen={isOpen} onClose={onClose} scrollBehavior='inside'>
                         <ModalOverlay />
@@ -118,7 +120,6 @@ const Play = () => {
                     </Modal>
 
 
-                </VStack>
                 <CardFooter>
                     <ButtonGroup gap='5' maxW='lg'>
                         <Button colorScheme='green' size='lg' marginLeft='2vw' onClick={() => handleAnswer(false)}>Legit!</Button>
@@ -131,8 +132,7 @@ const Play = () => {
 
     function answerScreen() {
         return (
-            <Card align='center' minHeight='60vh' minWidth='50vh' w='lg' h='md' maxH='md'>
-                <VStack spacing='3vh' align='center' maxH='inherit'>
+            <Card align='center' w={{base: 'sm', md: 'lg'}} h='md' maxH='md'>
                 <CardHeader alignItems='center'>
                     <Heading size='lg' textAlign='center'> The correct answer was: </Heading>
                     <Heading size='md' textAlign='center' padding='1vh'>
@@ -164,29 +164,25 @@ const Play = () => {
                         <Button colorScheme='blue' size='lg' width='20vw' marginRight='2vw' onClick={() => {getQuestion(); setAskingQuestion(!asking_question)}} key="continue">Continue</Button>
                     </ButtonGroup>
                 </CardFooter>
-                </VStack>
                 
             </Card>
         )
     }
 
     return (
-        <Flex height="100vh" alignItems="center" justifyContent="center">
-            <VStack direction='column' spacing='24px'>
-                {asking_question &&
-                    playScreen()
-                }
-                {!asking_question &&
-                    answerScreen()
-                }
-                <KeepingScore model_correct={model_correct} usr_correct={usr_correct} total_rounds={total_rounds} />
-                <Box ml='5'>
-                    <Text fontWeight='bold'>
-                        Made by Vanessa Dickerson
-                    </Text>
-                </Box>
-            </VStack>
-        </Flex>
+        <Center height='100vh'>
+            <Flex height="100vh" width='100vw' alignItems="center">
+                <VStack direction='column' spacing='24px' alignItems='center' width='100vw'>
+                    {asking_question &&
+                        playScreen()
+                    }
+                    {!asking_question &&
+                        answerScreen()
+                    }
+                    <KeepingScore model_correct={model_correct} usr_correct={usr_correct} total_rounds={total_rounds} />
+                </VStack>
+            </Flex>
+        </Center>
     );
 }
 
