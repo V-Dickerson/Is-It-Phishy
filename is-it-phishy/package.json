@@ -2,6 +2,7 @@
   "private": true,
   "proxy": "http://localhost:5000/",
   "scripts": {
+    "dev-all": "concurrently \"npm run dev\" \"flask --app api/index run --reload\"",
     "dev": "next",
     "build": "next build",
     "start": "next start",
@@ -12,6 +13,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@fontsource/hanken-grotesk": "^5.0.19",
+    "concurrently": "^8.2.2",
     "framer-motion": "^11.0.28",
     "next": "latest",
     "react": "^18.2.0",
