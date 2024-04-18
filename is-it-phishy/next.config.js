@@ -3,7 +3,10 @@ module.exports = () => {
       return [
         {
           source: "/api/:path*",
-          destination: "http://localhost:5000/:path*",
+          destination: 
+          process.env.NODE_ENV === 'development'
+          ? "http://localhost:5000/api/:path*"
+          : '/api/'
         },
       ];
     };

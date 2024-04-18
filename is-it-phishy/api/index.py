@@ -27,7 +27,7 @@ api.predictions_confidence = None
 ################## INTERFACED API FUNCTIONS ##################
 ##############################################################
 
-@api.route('/get-question')
+@api.route('/api/get-question')
 def getRandom(): # returns an array of the data features from the array
     print("getRandom called from server")
     # handle unloaded model
@@ -67,9 +67,9 @@ def getRandom(): # returns an array of the data features from the array
 def loadModel():
     print("loadModel called from server")
     try: 
-        with open('phishing-model-v1.pkl', 'rb') as file_handle:
+        with open('./api/phishing-model-v1.pkl', 'rb') as file_handle:
             api.model = pickle.load(file_handle)
-        with open('model-scaler.pkl', 'rb') as file_handle:
+        with open('./api/model-scaler.pkl', 'rb') as file_handle:
             api.model_scaler = pickle.load(file_handle)
         return True # worked as expected
     except:
@@ -78,7 +78,7 @@ def loadModel():
 # loads the test data used for the game (verifying predictions, informing users)
 def loadTesting():
     print('loadTesting called from server')
-    testing = pd.read_parquet('Testing.circ')
+    testing = pd.read_parquet('./api/Testing.circ')
     api.urls = testing['url'] # grabbing this for later! easily interfaced for returning data to server
     testing = testing.drop(['url'], axis=1)
     testing['status'] = testing['status'].replace({'phishing':1, 'legitimate':0})
