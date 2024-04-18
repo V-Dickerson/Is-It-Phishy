@@ -47,7 +47,7 @@ const Play = () => {
     }
 
     function getQuestion() {
-        fetch('http://lambishere.pythonanywhere.com/api/get-question').then((res) =>
+        fetch('https://lambishere.pythonanywhere.com/api/get-question').then((res) =>
             res.json().then((data) => {
                 setData({
                     url: data.url,
