@@ -6,7 +6,7 @@ module.exports = () => {
           destination: 
           process.env.NODE_ENV === 'development'
           ? "http://localhost:5000/api/:path*"
-          : '/api/'
+          : 'https://lambishere.pythonanywhere.com/api/:path*'
         },
       ];
     };
