@@ -10,7 +10,7 @@ const About = () => {
                 <Heading>About the Project</Heading>
                 <Card h='70vh' w='50vw'>
                     <CardHeader>
-                        <Heading align='center' size='md'>Made by Vanessa Dickerson</Heading>
+                        <Heading alignSelf='center' size='md'>Made by Vanessa Dickerson</Heading>
                     </CardHeader>
                     <CardBody>
                         <Text fontSize='large'>
