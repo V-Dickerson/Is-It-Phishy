@@ -47,6 +47,11 @@ const Play = () => {
     }
 
     function getQuestion() {
+        data.url = ""
+        data.url_data = []
+        data.model_answer = -1
+        data.model_confidence = -1
+        data.answer = -1
         fetch('https://lambishere.pythonanywhere.com/api/get-question').then((res) =>
             res.json().then((data) => {
                 setData({
@@ -156,7 +161,7 @@ const Play = () => {
                 <CardFooter>
                     <ButtonGroup gap='5' maxW='lg'>
                         <Button colorScheme='blue' size='lg' width='20vw' marginLeft='2vw' onClick={() => {router.push('/')}} key="restart">Restart</Button>
-                        <Button colorScheme='blue' size='lg' width='20vw' marginRight='2vw' onClick={() => {setAskingQuestion(!asking_question); getQuestion()}} key="continue">Continue</Button>
+                        <Button colorScheme='blue' size='lg' width='20vw' marginRight='2vw' onClick={() => {getQuestion(); setAskingQuestion(!asking_question)}} key="continue">Continue</Button>
                     </ButtonGroup>
                 </CardFooter>
                 </VStack>
