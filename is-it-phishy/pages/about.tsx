@@ -13,7 +13,7 @@ const About = () => {
                         <Heading alignSelf='center' size='sm'>Made by Vanessa Dickerson</Heading>
                     </CardHeader>
                     <CardBody h='60%'>
-                        <Text fontSize={{sm:'1.5vh', base: '2.4vw', md: '1.2vw'}} padding='1vh'>
+                        <Text fontSize={{sm:'1.5vh', base: '2.4vw', md: '1.1vw'}} padding='1vh'>
                             &nbsp;&nbsp;&nbsp;&nbsp;This game is intended to display how machine learning models work and what they look like in a way that
                             is accessible to people without technical backgrounds. For more information, you can go to the README on 
                             GitHub. This code, and the code that was used to generate the model, is all open source and accessible there.

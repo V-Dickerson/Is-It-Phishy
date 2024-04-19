@@ -1,12 +1,27 @@
-# Is-It-Phishy: Phishing Detection Game
-![image](https://github.com/V-Dickerson/Phishing-Detector/assets/113952778/61fc6e0b-c29f-41f5-b289-00156ff77bf6)
-![image](https://github.com/V-Dickerson/Phishing-Detector/assets/113952778/59477b94-a098-475a-a6be-a770a15a81e1)
-![image](https://github.com/V-Dickerson/Phishing-Detector/assets/113952778/da1313e6-f189-427d-9b53-79d740a3916b)
+# Is-It-Phishy, Vercel Deployment Branch
 
-
+## Branch Notes
+This branch is made specifically for deployment on the Vercel platform. This version
+fetches from a Flask API I deployed on PythonAnywhere that operates identically to the API on the
+main branch, rather than deploying an API directly within the application. The reason for this is that
+Vercel, the hosting platform, does not allow serverless functions to be above a certain size,
+and despite numerous efforts to optimize for deployment, the API was unable to be shrank to such
+a size that it could be deployed within the platform without error. The main branch still exists as
+the pure implementation.
 
 ## Overview
 Is-It-Phishy is an interactive web-based game designed to demonstrate machine learning models by creating a competition between the user and a model in detecting phishing URLs. The project incorporates a multi-layer perceptron model, developed in Python using sklearn, pandas, and numpy, which predicts whether a given URL is legitimate or a phishing attempt. This model is integrated into a React frontend that accesses the model predictions via a Flask backend, where users can directly interact with the predictions and see real-time results.
+
+## Display
+<p align="center">
+  <img alt="Gameplay Screen" src="https://github.com/V-Dickerson/Is-It-Phishy/assets/113952778/c8a2eeed-9609-46af-b750-8a161c389c5b" width="45%">
+  <img alt="Answer Screen" src="https://github.com/V-Dickerson/Is-It-Phishy/assets/113952778/bfbad7b6-b11b-4da8-b22d-d3f2f60334de" width="45%">
+</p>
+<p align="center">
+  <img alt="Intro Screen" src="https://github.com/V-Dickerson/Is-It-Phishy/assets/113952778/16d37d17-3b07-4fe9-a705-f59c75f7d0bb" width="28%">
+  <img alt="Model View Screen" src="https://github.com/V-Dickerson/Is-It-Phishy/assets/113952778/b7bb8059-ae77-4078-922d-dfda81bbc9e9" width="28%">
+  <img alt="About Screen" src="https://github.com/V-Dickerson/Is-It-Phishy/assets/113952778/e0720422-7a51-4a33-8fa6-79f6bbfebee0" width="28%">
+</p>
 
 ## Aims
 - **Interactive Gameplay:** Users test whether URLs are phishing attempts and see if they can outguess the model.
