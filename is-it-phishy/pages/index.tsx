@@ -20,16 +20,13 @@ const IndexPage = () => {
             </CardBody>
             <CardFooter>
               <ButtonGroup gap='12'>
-                <Button colorScheme='teal' size='lg' onClick={() => {router.push('/play')}}>Begin</Button>
-                <Button colorScheme='teal' size='lg' onClick={() => {router.push('/about')}}>About</Button>
+                <Button colorScheme='blue' size='lg' onClick={() => {router.push('/play')}}>Begin</Button>
+                <Button colorScheme='blue' size='lg' onClick={() => {router.push('/about')}}>About</Button>
               </ButtonGroup>
             </CardFooter>
           </VStack>
         </Card>
         <Box ml='3'>
-          <Text fontWeight='bold'>
-            Made by Vanessa Dickerson
-          </Text>
         </Box>
       </VStack>
     </Flex>
