@@ -35,6 +35,14 @@ import { useEffect, useState } from "react";
 import KeepingScore from "../components/KeepingScore";
 import { useRouter } from "next/router";
 
+type URLData = {
+    url: string,
+    url_data: any,
+    model_answer: number | null,
+    model_confidence: number | null,
+    answer: number,
+}
+
 const Play = () => {
     // basic hooks for tracking state on the page
     const [usr_correct, setUsrCorrect] = useState(0);
@@ -46,9 +54,11 @@ const Play = () => {
 
     const [isLoaded, setIsLoaded] = useState(false);
 
-    const [data, setData] = useState({
+
+
+    const [data, setData] = useState<URLData>({
         url: "",
-        url_data: [],
+        url_data: {},
         model_answer: -1,
         model_confidence: -1,
         answer: -1,
@@ -69,24 +79,37 @@ const Play = () => {
 
     // fetch call to the question, tracks whether question is loaded
     function getQuestion() {
+        
         setIsLoaded(false);
         data.url = "";
-        data.url_data = [];
+        data.url_data = {};
         data.model_answer = -1;
         data.model_confidence = -1;
         data.answer = -1;
-        fetch("https://lambishere.pythonanywhere.com/api/get-question").then(
-            (res) =>
-                res.json().then((data) => {
-                    setData({
-                        url: data.url,
-                        url_data: data.url_data,
-                        model_answer: data.model_answer,
-                        model_confidence: data.model_confidence,
-                        answer: data.answer,
-                    });
-                })
-        );
+        fetch('/api/getUrl').then((res) => {
+            res.json().then((data) => {
+                            setData({
+                                url: data.url,
+                                url_data: data.url_data,
+                                model_answer: data.model_answer,
+                                model_confidence: data.model_confidence,
+                                answer: data.answer,
+                            });
+                        })
+            
+        }).catch((err) => console.log((err as Error).toString()))
+        // fetch("https://lambishere.pythonanywhere.com/api/get-question").then(
+        //     (res) =>
+        //         res.json().then((data) => {
+        //             setData({
+        //                 url: data.url,
+        //                 url_data: data.url_data,
+        //                 model_answer: data.model_answer,
+        //                 model_confidence: data.model_confidence,
+        //                 answer: data.answer,
+        //             });
+        //         })
+        // );
         setIsLoaded(true);
     }
 
@@ -162,10 +185,10 @@ const Play = () => {
                                         </Thead>
 
                                         <Tbody>
-                                            {data.url_data.map((it) => (
-                                                <Tr key={it[0]}>
-                                                    <Td>{it[0]}</Td>
-                                                    <Td>{it[1]}</Td>
+                                            {Object.entries(data?.url_data ?? {}).map(([key, value]) => (
+                                                <Tr key={key}>
+                                                    <Td>{key}</Td>
+                                                    <Td>{value}</Td>
                                                 </Tr>
                                             ))}
                                         </Tbody>
@@ -237,7 +260,7 @@ const Play = () => {
                     </Text>
                     <Skeleton isLoaded={isLoaded}>
                         <Text align="center" fontSize="med" padding="1vh">
-                            {data.model_confidence}%
+                            {(data.model_confidence)}%
                         </Text>
                     </Skeleton>
                 </CardBody>

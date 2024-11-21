@@ -1,13 +1,12 @@
 module.exports = () => {
-    const rewrites = () => {
-      return [
-        {
-          source: "/api/:path*",
-          destination: 'https://lambishere.pythonanywhere.com/api/:path*'
+    const config = {
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: true,
+            ca: process.env.CERT,
         },
-      ];
     };
     return {
-      rewrites,
+        config,
     };
-  };
+};
