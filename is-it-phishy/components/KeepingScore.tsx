@@ -3,7 +3,7 @@ import { Card, CardBody, CardHeader, Heading, Text } from "@chakra-ui/react";
 
 export default function KeepingScore(props) {
     return (
-        <Card align='center' minWidth='50vh'>
+        <Card align='center' w={{base: 'sm', md: 'lg'}}>
             <CardHeader>
                 <Heading size='lg'>Scores</Heading>
             </CardHeader>

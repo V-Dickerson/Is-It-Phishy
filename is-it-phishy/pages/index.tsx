@@ -7,8 +7,8 @@ import { useRouter } from "next/router";
 const IndexPage = () => {
   const router = useRouter();
   return (
-    <Flex height="100vh" alignItems="center" justifyContent="center">
-      <VStack direction='column' spacing='24px'>
+    <Flex height="100vh" width='100vw' alignItems="center" alignContent='center'>
+      <VStack direction='column' spacing='24px' align='center' width='100vw'>
         <Card align='center' h='60vh' w='50vh'>
           <VStack spacing='40px'>
             <CardHeader>
@@ -20,16 +20,13 @@ const IndexPage = () => {
             </CardBody>
             <CardFooter>
               <ButtonGroup gap='12'>
-                <Button colorScheme='teal' size='lg' onClick={() => {router.push('/play')}}>Begin</Button>
-                <Button colorScheme='teal' size='lg' onClick={() => {router.push('/about')}}>About</Button>
+                <Button colorScheme='blue' size='lg' onClick={() => {router.push('/play')}}>Begin</Button>
+                <Button colorScheme='blue' size='lg' onClick={() => {router.push('/about')}}>About</Button>
               </ButtonGroup>
             </CardFooter>
           </VStack>
         </Card>
         <Box ml='3'>
-          <Text fontWeight='bold'>
-            Made by Vanessa Dickerson
-          </Text>
         </Box>
       </VStack>
     </Flex>

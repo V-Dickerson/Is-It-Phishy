@@ -14,6 +14,17 @@ Is-It-Phishy is an interactive web-based game designed to demonstrate machine le
   <img alt="About Screen" src="https://github.com/V-Dickerson/Is-It-Phishy/assets/113952778/e0720422-7a51-4a33-8fa6-79f6bbfebee0" width="28%">
 </p>
 
+## Display
+<p align="center">
+  <img alt="Gameplay Screen" src="https://github.com/V-Dickerson/Is-It-Phishy/assets/113952778/c8a2eeed-9609-46af-b750-8a161c389c5b" width="45%">
+  <img alt="Answer Screen" src="https://github.com/V-Dickerson/Is-It-Phishy/assets/113952778/bfbad7b6-b11b-4da8-b22d-d3f2f60334de" width="45%">
+</p>
+<p align="center">
+  <img alt="Intro Screen" src="https://github.com/V-Dickerson/Is-It-Phishy/assets/113952778/16d37d17-3b07-4fe9-a705-f59c75f7d0bb" width="28%">
+  <img alt="Model View Screen" src="https://github.com/V-Dickerson/Is-It-Phishy/assets/113952778/b7bb8059-ae77-4078-922d-dfda81bbc9e9" width="28%">
+  <img alt="About Screen" src="https://github.com/V-Dickerson/Is-It-Phishy/assets/113952778/e0720422-7a51-4a33-8fa6-79f6bbfebee0" width="28%">
+</p>
+
 ## Aims
 - **Interactive Gameplay:** Users test whether URLs are phishing attempts and see if they can outguess the model.
 - **Learning Opportunity:** Provides insights into how machine learning models make predictions.

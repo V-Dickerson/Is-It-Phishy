@@ -1,16 +1,14 @@
-module.exports = () => {
-    const rewrites = () => {
-      return [
-        {
-          source: "/api/:path*",
-          destination: 
-          process.env.NODE_ENV === 'development'
-          ? "http://localhost:5000/api/:path*"
-          : '/api/'
-        },
-      ];
-    };
-    return {
-      rewrites,
-    };
-  };
+// module.exports = () => {
+//     const config = {
+//         connectionString: process.env.DATABASE_URL,
+//         ssl: {
+//             rejectUnauthorized: true,
+//             ca: process.env.CERT,
+//         },
+//     };
+//     return {
+//         config,
+//     };
+// };
+
+// export { config }
