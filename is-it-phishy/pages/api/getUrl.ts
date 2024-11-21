@@ -1,3 +1,5 @@
+'use server';
+
 import { Pool } from "pg/lib";
 // import { config } from "../../next.config";
 
