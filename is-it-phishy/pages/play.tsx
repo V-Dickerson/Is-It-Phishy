@@ -262,9 +262,6 @@ const Play = () => {
                         <Text align="center" fontSize="med" padding="1vh">
                             {(data.model_confidence*100).toFixed(2)}%
                         </Text>
-                        <Text align="center" fontSize="med" fontStyle='italic' padding="1vh">
-                            Note - these levels are the confidence of the model, and might not reflect reality.
-                        </Text>
                     </Skeleton>
                 </CardBody>
                 <CardFooter minHeight='fit-content'>
