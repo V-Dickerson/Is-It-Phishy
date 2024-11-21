@@ -2,13 +2,6 @@ import { Pool } from "pg/lib";
 // import { config } from "../../next.config";
 
 
-const pool = new Pool({
-    connectionString: process.env.NEXT_PUBLIC_DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: true,
-      ca: process.env.NEXT_PUBLIC_CERT
-    }
-  });
 
 
 export default async function handler(request, response) {
@@ -16,6 +9,14 @@ export default async function handler(request, response) {
     // const query = `INSERT INTO events (title, description, event_date, event_time)
 //   VALUES ('${title}', '${description}', '${date}', '${time}');`;
     // console.log(config.toString())
+
+    const pool = new Pool({
+        connectionString: process.env.NEXT_PUBLIC_DATABASE_URL,
+        ssl: {
+          rejectUnauthorized: true,
+          ca: process.env.NEXT_PUBLIC_CERT
+        }
+      });
 
     const query = `
         SELECT json_build_object(
