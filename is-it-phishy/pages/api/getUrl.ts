@@ -1,22 +1,19 @@
 import { Pool } from "pg/lib";
 // import { config } from "../../next.config";
 
-
-
+const pool = new Pool({
+    connectionString: process.env.NEXT_PUBLIC_DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: true,
+        ca: process.env.NEXT_PUBLIC_CERT,
+    },
+});
 
 export default async function handler(request, response) {
     // const { title, description, date, time } = request.body;
     // const query = `INSERT INTO events (title, description, event_date, event_time)
-//   VALUES ('${title}', '${description}', '${date}', '${time}');`;
+    //   VALUES ('${title}', '${description}', '${date}', '${time}');`;
     // console.log(config.toString())
-
-    const pool = new Pool({
-        connectionString: process.env.NEXT_PUBLIC_DATABASE_URL,
-        ssl: {
-          rejectUnauthorized: true,
-          ca: process.env.NEXT_PUBLIC_CERT
-        }
-      });
 
     const query = `
         SELECT json_build_object(
@@ -33,18 +30,14 @@ export default async function handler(request, response) {
         LIMIT 1;
     `;
 
-
-
-
-  
     try {
-      const client = await pool.connect();
-      const url_details = await client.query(query);
-      response.json(url_details.rows[0].data);
-      client.release();
+        const client = await pool.connect();
+        const url_details = await client.query(query);
+        response.json(url_details.rows[0].data);
+        client.release();
     } catch (err) {
-      response.status(500).json({
-        message: err.message
-      });
+        response.status(500).json({
+            message: err.message,
+        });
     }
-  }
+}
