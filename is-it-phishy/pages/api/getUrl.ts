@@ -1,14 +1,12 @@
-'use server';
-
 import { Pool } from "pg/lib";
 // import { config } from "../../next.config";
 
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
+    connectionString: process.env.NEXT_PUBLIC_DATABASE_URL,
     ssl: {
       rejectUnauthorized: true,
-      ca: process.env.CERT
+      ca: process.env.NEXT_PUBLIC_CERT
     }
   });
 
