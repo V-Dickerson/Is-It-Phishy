@@ -1,5 +1,5 @@
 import { Pool } from "pg/lib";
-import config from "../../next.config";
+// import { config } from "../../next.config";
 
 
 const pool = new Pool({
