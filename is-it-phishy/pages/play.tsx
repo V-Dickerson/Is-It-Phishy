@@ -149,6 +149,8 @@ const Play = () => {
                         textAlign="center"
                         alignSelf="center"
                         width="20vw"
+                        maxWidth="max-content"
+                        paddingX='1vw'
                         minWidth="200px"
                         onClick={onOpen}
                     >
